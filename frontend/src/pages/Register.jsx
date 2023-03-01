@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { FaUser } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import { useSelector, useDispatch } from 'react-redux';
-import { register } from '../features/auth/authSlice';
+import { register, reset } from '../features/auth/authSlice';
 
 function Register() {
   const [formData, setFormdata] = useState({
@@ -16,10 +17,25 @@ function Register() {
 
   const dispatch = useDispatch();
 
-  const { user, isLoading, isSuccess, message } = useSelector(
+  const navigate = useNavigate();
+
+  const { user, isLoading, isSuccess, isError, message } = useSelector(
     // useSelector hook is used to get the state value from global state into the component
     (state) => state.auth,
   );
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+
+    // Redirect when logged in
+    if (isSuccess || user) {
+      navigate('/');
+    }
+
+    dispatch(reset());
+  }, [dispatch, isError, isSuccess, message, navigate, user]);
 
   const onChange = (e) => {
     setFormdata((prevState) => ({
