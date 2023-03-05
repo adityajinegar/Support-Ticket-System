@@ -39,10 +39,10 @@ function Tickets() {
           <div>Product</div>
           <div>Status</div>
           <div></div>
-          {tickets.map((ticket) => (
-            <TicketItem key={ticket._id} ticket={ticket} />
-          ))}
         </div>
+        {tickets.map((ticket) => (
+          <TicketItem key={ticket._id} ticket={ticket} />
+        ))}
       </div>
     </>
   );
