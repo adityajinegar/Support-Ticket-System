@@ -1,5 +1,6 @@
 const path = require('path');
 const express = require('express');
+var cors = require('cors');
 const colors = require('colors');
 const dotenv = require('dotenv').config();
 const { errorHandler } = require('./middleware/errorMiddleware');
@@ -8,6 +9,8 @@ const PORT = process.env.PORT || 5000;
 
 // Connect to databse
 connectDB();
+
+app.use(cors());
 
 const app = express();
 
