@@ -18,7 +18,7 @@ app.use(
   cors({
     origin: [
       'http://localhost:3000',
-      'https://support-ticket-system.onrender.com',
+      'https://support-ticket-system-static.onrender.com',
     ],
   }),
 );
